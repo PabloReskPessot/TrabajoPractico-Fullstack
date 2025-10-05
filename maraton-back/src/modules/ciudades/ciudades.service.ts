@@ -14,7 +14,8 @@ export class CiudadesService {
   ) { }
 
   create(createCiudadeDto: CreateCiudadeDto) {
-    return 'This action adds a new ciudade';
+    const nuevaCiudad = this.ciudadRepository.create(createCiudadeDto);
+    return this.ciudadRepository.save(nuevaCiudad);
   }
 
 
@@ -23,14 +24,14 @@ export class CiudadesService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} ciudade`;
+    return this.ciudadRepository.findOneBy({ id });
   }
 
   update(id: number, updateCiudadeDto: UpdateCiudadeDto) {
-    return `This action updates a #${id} ciudade`;
+    return this.ciudadRepository.update(id, updateCiudadeDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} ciudade`;
+    return this.ciudadRepository.delete(id);
   }
 }

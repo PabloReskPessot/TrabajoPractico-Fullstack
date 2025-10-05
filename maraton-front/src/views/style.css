@@ -1,3 +1,10 @@
+body {
+  background-color: #c19c9c !important;
+  /* El !important fuerza la prioridad */
+  color: #ffffff;
+  /* Para que el texto sea legible */
+}
+
 .home-container {
   min-height: 100vh;
   display: flex;
@@ -34,7 +41,7 @@
   text-decoration: none;
   color: inherit;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  background-color: #af0f0f;
+  background-color: #DE1414;
 }
 
 .recuadro img {
@@ -42,7 +49,7 @@
   height: 70%;
   object-fit: cover;
   border-radius: 5%;
-  background-color: #af0f0f;
+  background-color: #DE1414;
 }
 
 .recuadro span {
@@ -52,14 +59,13 @@
   align-items: center;
   font-weight: bold;
   font-size: 1.2rem;
-  background-color: #af0f0f;
   width: 100%;
-  color: black
+  color: #1E0303
 }
 
 .recuadro:hover {
   transform: scale(1.05);
-  box-shadow: 2px 2px 15px #af0f0f;
+  box-shadow: 2px 2px 15px #ffffff;
 
 }
 
@@ -67,7 +73,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 250px;
+  width: auto;
   height: 250px;
   border: 2px solid #ccc;
   border-radius: 12px;
@@ -75,5 +81,16 @@
   text-decoration: none;
   color: inherit;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  background-color: #af0f0f;
+  background-color: #DE1414;
+}
+
+.botton-home {
+  margin-top: 10px;
+}
+
+.seleccionaCRUD {
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-top: 10px;
+
 }

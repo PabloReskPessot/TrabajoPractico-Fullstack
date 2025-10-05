@@ -5,7 +5,7 @@ import { UpdateCiudadeDto } from './dto/update-ciudade.dto';
 
 @Controller('ciudades')
 export class CiudadesController {
-  constructor(private readonly ciudadesService: CiudadesService) {}
+  constructor(private readonly ciudadesService: CiudadesService) { }
 
   @Post()
   create(@Body() createCiudadeDto: CreateCiudadeDto) {

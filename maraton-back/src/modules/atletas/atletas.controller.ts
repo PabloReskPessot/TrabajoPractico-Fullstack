@@ -7,10 +7,10 @@ import { UpdateAtletaDto } from './dto/update-atleta.dto';
 export class AtletasController {
   constructor(private readonly atletasService: AtletasService) { }
 
-  // @Post()
-  // create(@Body() createAtletaDto: CreateAtletaDto) {
-  //   return this.atletasService.create(createAtletaDto);
-  // }
+  @Post()
+  create(@Body() createAtletaDto: CreateAtletaDto) {
+    return this.atletasService.create(createAtletaDto);
+  }
 
   @Get()
   findAll() {
