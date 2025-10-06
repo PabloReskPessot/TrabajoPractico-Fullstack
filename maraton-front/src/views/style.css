@@ -1,8 +1,18 @@
 body {
-  background-color: #c19c9c !important;
-  /* El !important fuerza la prioridad */
-  color: #ffffff;
-  /* Para que el texto sea legible */
+  margin: 0;
+  /* Elimina el margen por defecto del body */
+  background-image: url('@/assets/Fondo.jpeg');
+  /* Cambia esto por la ruta de tu imagen */
+  background-size: cover;
+  /* La imagen cubrirá todo el espacio */
+  background-repeat: no-repeat;
+  /* Evita que la imagen se repita */
+  background-position: center;
+  /* Centra la imagen */
+  min-height: 100vh;
+  /* Asegura que el body ocupe al menos toda la altura de la pantalla */
+  /* Puedes ajustar estas propiedades según tus necesidades */
+
 }
 
 .home-container {
@@ -15,6 +25,8 @@ body {
   /* centra vertical */
   grid-column: 1 / -1;
   /* ocupa todas las columnas del grid */
+
+  color: #ffffff;
 }
 
 .titulo {
@@ -41,7 +53,7 @@ body {
   text-decoration: none;
   color: inherit;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  background-color: #DE1414;
+  background-color: #d7fd35;
 }
 
 .recuadro img {
@@ -49,7 +61,7 @@ body {
   height: 70%;
   object-fit: cover;
   border-radius: 5%;
-  background-color: #DE1414;
+  background-color: #d7fd35;
 }
 
 .recuadro span {
@@ -60,7 +72,7 @@ body {
   font-weight: bold;
   font-size: 1.2rem;
   width: 100%;
-  color: #1E0303
+  color: #000000
 }
 
 .recuadro:hover {
@@ -81,7 +93,7 @@ body {
   text-decoration: none;
   color: inherit;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  background-color: #DE1414;
+  background-color: #d7fd35;
 }
 
 .botton-home {
@@ -93,4 +105,67 @@ body {
   margin-left: 10px;
   margin-top: 10px;
 
+}
+
+/* =============================== */
+/* 🎯 ESTILO GLOBAL DE TABLAS GET */
+/* =============================== */
+
+.tablaGet {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.05);
+  /* Fondo transparente sutil */
+  backdrop-filter: blur(5px);
+  /* Efecto vidrio */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.tablaGet thead {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.tablaGet th,
+.tablaGet td {
+  padding: 12px 18px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tablaGet th {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.85rem;
+  color: #ffffff;
+}
+
+.tablaGet td {
+  color: #f1f1f1;
+  font-size: 0.9rem;
+}
+
+/* 🪶 Intercalado de filas */
+.tablaGet tbody tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+/* ✨ Hover */
+.tablaGet tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: 0.2s ease;
+}
+
+/* 📱 Responsivo */
+@media (max-width: 768px) {
+
+  .tablaGet th,
+  .tablaGet td {
+    padding: 10px;
+    font-size: 0.8rem;
+  }
 }

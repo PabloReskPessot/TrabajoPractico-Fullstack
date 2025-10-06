@@ -23,10 +23,13 @@ const ciudades = ref<Ciudad[]>([]);
 
 
 onMounted(async () => {
-  const prueba = await fetch('http://localhost:3000/ciudades');
-  console.log(prueba.json)
+  listaCiudades()
+});
 
+const nombreCiudad = ref('');
+const idCiudad = ref<number | null>(null);
 
+async function listaCiudades(){
   try {
     const respuesta = await fetch('http://localhost:3000/ciudades');
     if (!respuesta.ok) {
@@ -37,7 +40,82 @@ onMounted(async () => {
   } catch (error) {
     console.error('Error al cargar las ciudades:', error);
   }
-});
+}
+
+async function crearCiudad() {
+  try {
+    const response = await fetch('http://localhost:3000/ciudades', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        nombre: nombreCiudad.value, // debe coincidir con tu CreateCiudadDto
+      }),
+    })
+
+    if (!response.ok) throw new Error('Error al crear la ciudad')
+
+    const data = await response.json()
+    console.log('Ciudad creada:', data)
+    alert('Ciudad creada correctamente')
+
+    // opcional: limpiar input o actualizar la lista
+    nombreCiudad.value = ''
+
+  } catch (error) {
+    console.error('Error:', error)
+    alert('Error al conectar con el servidor')
+  }
+}
+
+async function modificarCiudad(){
+try {
+    const response = await fetch(`http://localhost:3000/ciudades/${idCiudad.value}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        nombre: nombreCiudad.value, // debe coincidir con tu CreateCiudadDto
+      }),
+    })
+
+    if (!response.ok) throw new Error('Error al modificar la ciudad')
+
+    const data = await response.json()
+    console.log('Ciudad modificada:', data)
+    alert('Ciudad modificada correctamente')
+
+    // opcional: limpiar input o actualizar la lista
+    nombreCiudad.value = ''
+
+  } catch (error) {
+    console.error('Error:', error)
+    alert('Error al conectar con el servidor')
+  }
+}
+
+async function borrarCiudad(){
+try {
+    const response = await fetch(`http://localhost:3000/ciudades/${idCiudad.value}`, {
+      method: 'Delete',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+
+    if (!response.ok) throw new Error('Error al borrar la ciudad')
+
+    const data = await response.json()
+    console.log('Ciudad borrada:', data)
+    alert('Ciudad borrada correctamente')
+
+  } catch (error) {
+    console.error('Error:', error)
+    alert('Error al conectar con el servidor')
+  }
+}
 
 </script>
 
@@ -56,22 +134,34 @@ onMounted(async () => {
               <li><a @click="seleccionarAccion('crear')" class="nav-link px-2">Crear</a></li>
               <li><a @click="seleccionarAccion('modificar')"class="nav-link px-2">Modificar</a></li> 
               <li><a @click="seleccionarAccion('borrar')" class="nav-link px-2">Borrar</a></li> 
-              <li><a @click="seleccionarAccion('consultar')" class="nav-link px-2">Consultar</a></li> 
             </ul>
           </header>
           <div class="formularios">
             <div v-if="accionSeleccionada === 'crear'">
-              <form>
-                <input type="text" placeholder="Nombre"> </input>
+              <form @submit.prevent="crearCiudad">
+                <input type="text" placeholder="Nombre" v-model="nombreCiudad" > </input>
+                <button type="submit" class="btn btn-outline-dark">Enviar</button>
               </form>
-              <button type="button" class="btn btn-outline-dark" @click="" >Enviar</button>
             </div>
+            <div v-if="accionSeleccionada === 'modificar'">
+              <form @submit.prevent="modificarCiudad">
+                <input type="number" placeholder="Id" v-model="idCiudad"> </input>
+                <input type="text" placeholder="Nombre" v-model="nombreCiudad" > </input>
+                <button type="submit" class="btn btn-outline-dark">Enviar</button>
+              </form>
 
+            </div>
+            <div v-if="accionSeleccionada === 'borrar'">
+              <form @submit.prevent="borrarCiudad">
+                <input type="number" placeholder="Id" v-model="idCiudad"> </input>
+                <button type="submit" class="btn btn-outline-dark">Borrar</button>
+              </form>
+            </div>
           </div>
 
         </div>
       </div>
-      <div class="">
+      <div class="tablaGet">
           <span> lista de ciudades </span>
             <table>
               <thead>
@@ -92,10 +182,11 @@ onMounted(async () => {
       </tr>
     </tbody>
             </table>
+            <button type="button" class="btn btn-outline-light" @click="listaCiudades">Actualizar</button>
       </div>
     </div>
     <div class="botton-home">
-        <button type="button" class="btn btn-outline-dark" @click="$router.push('/')" > Home </button>
+        <button type="button" class="btn btn-outline-light" @click="$router.push('/')" > Home </button>
       </div>
   </main>
 </template>

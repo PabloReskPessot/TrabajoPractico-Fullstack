@@ -12,12 +12,24 @@ export class AtletasService {
     @InjectRepository(Atleta)
     private readonly atletaRepository: Repository<Atleta>,
   ) { }
-  create(createAtletaDto: CreateAtletaDto) {
-    // 1. Crear una instancia de la entidad en memoria
-    const nuevoAtleta = this.atletaRepository.create(createAtletaDto);
+  // create(createAtletaDto: CreateAtletaDto) {
+  //   // 1. Crear una instancia de la entidad en memoria
+  //   const nuevoAtleta = this.atletaRepository.create(createAtletaDto);
 
-    // 2. Guardar la instancia en la base de datos y devolver la entidad creada
-    //    TypeORM realiza la inserción (INSERT) de forma automática.
+  //   // 2. Guardar la instancia en la base de datos y devolver la entidad creada
+  //   //    TypeORM realiza la inserción (INSERT) de forma automática.
+  //   return this.atletaRepository.save(nuevoAtleta);
+  // }
+  async create(createAtletaDto: CreateAtletaDto) {
+    // Extraer ciudadId del DTO
+    const { ciudadId, ...atletaData } = createAtletaDto;
+
+    // Crear la entidad con la relación
+    const nuevoAtleta = this.atletaRepository.create({
+      ...atletaData,
+      ciudad: { id: ciudadId }  // ← Crear relación con solo el ID
+    });
+
     return this.atletaRepository.save(nuevoAtleta);
   }
   findAll() {
