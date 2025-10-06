@@ -19,19 +19,18 @@ export class AtletasService {
   //   // 2. Guardar la instancia en la base de datos y devolver la entidad creada
   //   //    TypeORM realiza la inserción (INSERT) de forma automática.
   //   return this.atletaRepository.save(nuevoAtleta);
-  // }
-  async create(createAtletaDto: CreateAtletaDto) {
-    // Extraer ciudadId del DTO
-    const { ciudadId, ...atletaData } = createAtletaDto;
+  // } 
 
-    // Crear la entidad con la relación
+  // atleta.service.ts
+  async create(createAtletaDto: CreateAtletaDto) {
     const nuevoAtleta = this.atletaRepository.create({
-      ...atletaData,
-      ciudad: { id: ciudadId }  // ← Crear relación con solo el ID
+      ...createAtletaDto,
+      ciudad: { id: createAtletaDto.ciudadId } as any,
     });
 
     return this.atletaRepository.save(nuevoAtleta);
   }
+
   findAll() {
     return this.atletaRepository.find();
   }

@@ -8,19 +8,8 @@ export class AtletasController {
   constructor(private readonly atletasService: AtletasService) { }
 
   @Post()
-  // create(@Body() createAtletaDto: CreateAtletaDto) {
-  //   return this.atletasService.create(createAtletaDto);
-  // }
   create(@Body() createAtletaDto: CreateAtletaDto) {
-    console.log('DTO recibido:', createAtletaDto);
-    try {
-      const result = this.atletasService.create(createAtletaDto);
-      console.log('Resultado:', result);
-      return result;
-    } catch (error) {
-      console.error('Error completo:', error);
-      throw error;
-    }
+    return this.atletasService.create(createAtletaDto);
   }
 
   @Get()

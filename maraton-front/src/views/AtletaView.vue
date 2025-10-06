@@ -98,7 +98,7 @@ async function crearAtleta() {
         nombre: nombreAtleta.value, 
         tiempo: tiempoAtleta.value,
         posicion: posicionAtleta.value,
-        ciudad: ciudadIdNum,
+        ciudadId: ciudadIdNum,
       }),
     })
    
@@ -144,7 +144,7 @@ try {
         nombre: nombreAtleta.value, 
         tiempo: tiempoAtleta.value,
         posicion: posicionAtleta.value,
-        "ciudadId": ciudadIdNum,
+        ciudadId: ciudadIdNum,
       }),
     })
 
